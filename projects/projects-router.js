@@ -37,4 +37,15 @@ router.post("/resources", (req, res) => {
         res.status(200).json(newResource);
     })
 })//adds a new resource
+
+router.get("/tasks", (req, res) => {
+    Projects.findTasks()
+    .then(tasks => {
+        res.status(200).json(tasks);
+    })
+    .catch(err => {
+        res.status(500).json(err.message)
+    })
+})
+
 module.exports = router;

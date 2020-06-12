@@ -6,7 +6,8 @@ module.exports = {
     findProjects,
     addProject,
     findResources,
-    addResource
+    addResource,
+    findTasks
 };
 
 function findProjects() {
@@ -29,4 +30,10 @@ function addResource(newResource) {
     .then(() => {
         return newResource;
     })
+}//working
+
+function findTasks() {
+    return db("tasks")
+    .join("projects", "projects.id", "tasks.project_id")
+    .select("projects.project_name", "projects.project_desc", "tasks.task_desc", "tasks.step_number");
 }
