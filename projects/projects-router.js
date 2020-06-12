@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
     .catch(err => {
         res.status(500).json({error: err.message})
     })
-})
+})//finds all projects
 
 router.post("/", (req, res) => {
     Projects.addProject(req.body)
@@ -22,6 +22,19 @@ router.post("/", (req, res) => {
     .catch(err => {
         res.status(500).json(err.message)
     })
-})
+})//adds a project
 
+router.get("/resources", (req, res) => {
+    Projects.findResources()
+    .then(resources => {
+        res.status(200).json(resources);
+    })
+})//finds all resources
+
+router.post("/resources", (req, res) => {
+    Projects.addResource(req.body)
+    .then(newResource => {
+        res.status(200).json(newResource);
+    })
+})//adds a new resource
 module.exports = router;

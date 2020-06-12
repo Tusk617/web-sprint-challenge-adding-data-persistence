@@ -4,7 +4,9 @@ const db = knex(knexConfig.development);
 
 module.exports = {
     findProjects,
-    addProject
+    addProject,
+    findResources,
+    addResource
 };
 
 function findProjects() {
@@ -15,5 +17,16 @@ function addProject(newProject) {
     return db("projects").insert(newProject)
     .then(() => {
         return newProject;
+    })
+}//working
+
+function findResources() {
+    return db("resources");
+}//working
+
+function addResource(newResource) {
+    return db("resources").insert(newResource)
+    .then(() => {
+        return newResource;
     })
 }
