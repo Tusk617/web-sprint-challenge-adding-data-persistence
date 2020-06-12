@@ -7,7 +7,8 @@ module.exports = {
     addProject,
     findResources,
     addResource,
-    findTasks
+    findTasks,
+    addTasks
 };
 
 function findProjects() {
@@ -36,4 +37,11 @@ function findTasks() {
     return db("tasks")
     .join("projects", "projects.id", "tasks.project_id")
     .select("projects.project_name", "projects.project_desc", "tasks.task_desc", "tasks.step_number");
+}//working
+
+function addTasks(newTasks, id) {
+    return db("tasks").insert(newTasks).where({project_id: Number(id)})
+    .then(() => {
+        return newTasks;
+    })
 }
